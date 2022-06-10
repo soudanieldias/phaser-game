@@ -25,13 +25,19 @@ var level = 1;
 var game = new Phaser.Game(config);
 var powerUp;
 
+// Pré-Carregamento dos Elementos contidos no Jogo
 function preload ()
 {
+    // Imagens
     this.load.image('sky', 'assets/sky.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/forms.png');
+
+    // Sprites
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+    // Músicas e Efeitos Sonoros
     this.load.audio('coin', ['assets/audio/coin.mp3']);
     this.load.audio('death', ['assets/audio/death.mp3']);
     this.load.audio('powerup', ['assets/audio/powerup.mp3']);
@@ -44,7 +50,7 @@ function create ()
 
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(400, 568, 'ground').setScale(3).refreshBody();
 
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
