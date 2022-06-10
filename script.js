@@ -18,18 +18,11 @@ var config = {
 };
 
 // Variáveis
-var player;
-var stars;
-var platforms;
-var cursors;
+var backgroundSong, bombs, cursors, death, music, platforms, player, stars;
+var scoreText, levelText;
 var score = 0;
-var scoreText;
 var level = 1;
-var levelText;
-var bombs;
 var game = new Phaser.Game(config);
-var music;
-var death;
 var powerUp;
 
 function preload ()
@@ -42,6 +35,7 @@ function preload ()
     this.load.audio('coin', ['assets/audio/coin.mp3']);
     this.load.audio('death', ['assets/audio/death.mp3']);
     this.load.audio('powerup', ['assets/audio/powerup.mp3']);
+    this.load.audio('backgroundSong', ['assets/audio/backgroundSong.mp3']);
 }
 
 function create ()
@@ -109,6 +103,8 @@ function create ()
     music = this.sound.add('coin');
     death = this.sound.add('death');
     powerUp = this.sound.add('powerup');
+    backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
+    backgroundSong.play();
 }
 
 function update ()
@@ -170,7 +166,7 @@ function collectStar (player, star)
 function hitBomb (player, bomb)
 {
     this.physics.pause();
-    
+    backgroundSong.stop();
     death.play();
 
     player.setTint(0xff0000);
